@@ -13,7 +13,8 @@ require_once("logica-usuario.php");
 	<tr>
 		<td><?= $produto->nome?></td>
 		<td><?= $produto->preco?></td>
-		<td><?=substr($produto->descricao, 0, 15)?>...</td>
+		<td><?= $produto->precoComDesconto(0.1) ?></td>
+		<td><?=substr($produto->descricao, 0, 35)?>...</td>
 		<td><?=$produto->categoria->nome?></td>
 		<td><a class="btn btn-primary" href="produto-altera-produto.php?id=<?=$produto->id?>">Alterar</a></td>
 		<td>
