@@ -1,34 +1,38 @@
 <?php 
 require_once("cabecalho.php");
 require_once("banco-produto.php");
+require_once("logica-usuario.php");
 require_once("class/Produto.php");
 require_once("class/Categoria.php");
 
+verificaUsuario();
+
 $produto = new Produto();
 
-$produto->id 	       = $_POST['id'];
-$produto->nome         = $_POST["nome"];
-$produto->preco        = $_POST["preco"];
-$produto->descricao    = $_POST["descricao"];
+$produto->setId($_POST['id']);
+$produto->setNome($_POST["nome"]);
+$produto->setPreco($_POST["preco"]);
+$produto->setDescricao($_POST["descricao"]);
 
-$categoria             = new Categoria();
-$categoria->id         = $_POST['categoria_id'];
+$categoria = new Categoria();
+$categoria->setId($_POST['categoria_id']);
 
-$produto->categoria    = $categoria;
+$produto->setCategoria($categoria);
 
-if (array_key_exists('usado', $_POST))
-	$produto->usado = "true";
-else
-	$produto->usado = "false";
+if (array_key_exists('usado', $_POST)) {
+	$produto->setUsado("true");
+} else {
+	$produto->setUsado("false");
+}
 
 	if(alteraProduto($conexao, $produto)){
 ?>
-<p class="text-success">Produto <?= $produto->nome; ?>, <?= $produto->preco; ?> alterado com sucesso!</p>
+<p class="text-success">Produto <?= $produto->getNome(); ?>, <?= $produto->getPreco(); ?> alterado com sucesso!</p>
 <?php 
 	}else{
 		$msg = mysqli_error($conexao);
 ?>
-<p class="text-danger">Produto <?= $produto->nome; ?>, não foi alterado: <?= $msg; ?></p>
+<p class="text-danger">Produto <?= $produto->getNome(); ?>, não foi alterado: <?= $msg; ?></p>
 <?php 
 	}
 ?>

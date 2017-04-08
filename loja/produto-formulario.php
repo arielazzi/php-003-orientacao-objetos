@@ -6,11 +6,11 @@ require_once("class/Produto.php");
 
 verificaUsuario();
 
-$categoria          = new Categoria();
-$categoria->id      = 1;
+$categoria = new Categoria();
+$categoria->setId(1);
 
-$produto            = new Produto();
-$produto->categoria = $categoria;
+$produto = new Produto();
+$produto->setCategoria($categoria);
 
 $categorias = listaCategorias($conexao);
 ?>

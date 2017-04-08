@@ -9,12 +9,12 @@ $id = $_GET['id'];
 
 $produto = busca_produto($conexao, $id);
 
-$usado = $produto->usado ? "checked='checked'" : "";
+$usado = $produto->getUsado() ? "checked='checked'" : "";
 ?>
 	<h1>Alterando produto</h1>
     <form action="altera-produto.php" method="post">
     	<table class="table">
-    	 	<input type="hidden" name="id" value="<?=$produto->id?>">
+    	 	<input type="hidden" name="id" value="<?=$produto->getId()?>">
 			<?php include("produto-formulario-base.php"); ?>
 			<tr>
 				<td>
